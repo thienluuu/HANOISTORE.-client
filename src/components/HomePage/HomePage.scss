@@ -1,0 +1,15 @@
+@import"../../css-config/mixins.scss";
+
+.home {
+    height: calc(100% - 20px);
+
+    .main-content {
+        margin: 0 10px;
+
+        @include lg {
+            margin: 0 350px;
+        }
+
+        .layout {}
+    }
+}

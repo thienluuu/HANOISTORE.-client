@@ -1,0 +1,44 @@
+.admin {
+    height: calc(100vh - 80px);
+
+    .admin-info {
+        height: 250px;
+        border: 1px solid red;
+    }
+
+    .admin-menu {
+
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+
+        .header {
+            text-align    : center;
+            font-size     : 25px;
+            font-weight   : 600;
+            text-transform: uppercase;
+            padding       : 10px;
+
+        }
+
+        .menu-container {
+            display         : flex;
+            align-items     : center;
+            justify-content : center;
+            background-color: black;
+            gap             : 100px;
+            height          : 50px;
+
+            .menu-item {
+                list-style     : none;
+                line-height    : 50px;
+                cursor         : pointer;
+                text-decoration: none;
+                font-size      : 14px;
+                color          : white;
+                height         : 50px !important;
+
+            }
+        }
+    }
+}

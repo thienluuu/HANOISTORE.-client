@@ -1,0 +1,291 @@
+@import"../../css-config/mixins.scss";
+
+.main-header {
+    width           : 100%;
+    padding         : 0 20px;
+    background-color: #212121;
+    color           : white;
+    border          : 1px solid rgba(0, 0, 0, 0.1);
+    z-index         : 99;
+    position        : relative;
+
+    @include lg {
+        padding: 0 40px;
+    }
+
+    .header-content {
+        display        : flex;
+        justify-content: space-between;
+        align-items    : center;
+        height         : 50px;
+        max-width      : 1200px;
+        margin         : 0 auto;
+
+        @include md {
+            height: 80px;
+        }
+
+        .left {
+            display       : none;
+            list-style    : none;
+            flex-direction: row;
+            align-items   : center;
+            gap           : 25px;
+            margin-bottom : 0px;
+
+            @include md {
+                display: flex;
+            }
+
+            a {
+                font-size      : 16px;
+                font-weight    : 600;
+                text-transform : uppercase;
+                text-decoration: none;
+                cursor         : pointer;
+                color          : white;
+                display        : block;
+                height         : 80px;
+                line-height    : 80px;
+
+
+            }
+        }
+
+        .center {
+            font-size      : 22px;
+            font-weight    : 700;
+            cursor         : pointer;
+            color          : white;
+            text-decoration: none;
+            display        : block;
+            height         : 80px;
+            line-height    : 80px;
+
+
+            @include md {
+                font-size: 34px;
+            }
+        }
+
+        .right {
+            display    : flex;
+            align-items: center;
+            gap        : 15px;
+
+            @include lg {
+                gap: 25px;
+
+            }
+
+            svg {
+                font-size: 20px;
+                cursor   : pointer;
+
+                @include md {
+                    font-size: 30px;
+                }
+            }
+
+            .cart-icon {
+                position: relative;
+
+                span {
+                    min-width       : 20px;
+                    text-align      : center;
+                    background-color: #8e2de8;
+                    position        : absolute;
+                    top             : -5px;
+                    right           : -12px;
+                    font-size       : 12px;
+                    line-height     : 1;
+                    border-radius   : 10px;
+                }
+            }
+
+            .login-btn {
+                border          : none;
+                outline         : none;
+                padding         : 5px;
+                font-size       : 14px;
+                font-weight     : 600;
+                color           : white;
+                border-radius   : 3px;
+                background-color: #8e2de8;
+                cursor          : pointer;
+                text-decoration : none;
+
+                @include md {
+                    padding    : 5px 25px;
+                    margin-left: 25px;
+                    font-size  : 20px;
+
+                }
+
+            }
+
+
+            a {
+                .user-logged {
+                    color: white;
+                }
+
+            }
+
+            .order {
+                .shipping {
+                    background-color: #8e2de8;
+                    width           : 300px;
+                    height          : 210px;
+                    padding         : 10px;
+                    overflow-y      : scroll;
+
+                    .title {
+                        margin-top: 5px;
+                        font-size : 18px;
+                    }
+
+                    .item {
+                        display        : flex;
+                        justify-content: space-between;
+                        align-items    : center;
+                        padding        : 5px;
+                        margin-top     : 5px;
+
+                        img {
+                            width     : 50px;
+                            height    : 50px;
+                            object-fit: cover;
+                        }
+
+                        .product-detail {
+                            display       : flex;
+                            flex-direction: column;
+                            overflow      : hidden;
+                            flex-shrink   : 10;
+
+                            span {
+                                white-space  : nowrap;
+                                overflow     : hidden;
+                                text-overflow: ellipsis;
+                            }
+                        }
+
+                        button {
+                            outline      : none;
+                            padding      : 3px 4px;
+                            border       : none;
+                            border-radius: 2px;
+                        }
+                    }
+                }
+
+                .new-order {
+                    background-color: #8e2de8;
+                    width           : 300px;
+                    height          : 210px;
+                    padding-top     : 10px;
+                    padding-left    : 10px;
+                    border-bottom   : 1px solid #212121;
+                    overflow-y      : scroll;
+
+                    .title {
+                        margin-top: 5px;
+                        font-size : 18px;
+                    }
+
+                    .item {
+                        display        : flex;
+                        justify-content: space-between;
+                        align-items    : center;
+                        padding        : 5px;
+
+                        img {
+                            width     : 50px;
+                            height    : 50px;
+                            object-fit: cover;
+                            padding   : 5px;
+                        }
+
+                        .product-detail {
+                            display       : flex;
+                            flex-direction: column;
+                            overflow      : hidden;
+                            flex-shrink   : 10;
+
+
+                            .name {
+                                overflow       : hidden;
+                                position       : relative;
+                                display        : inline-block;
+                                margin         : 0 5px 0 5px;
+                                text-align     : center;
+                                text-decoration: none;
+                                text-overflow  : ellipsis;
+                                white-space    : nowrap;
+                            }
+                        }
+
+                        button {
+                            outline      : none;
+                            padding      : 3px 4px;
+                            border       : none;
+                            border-radius: 2px;
+                        }
+                    }
+                }
+
+                .order-footer {
+                    height         : 40px;
+                    display        : flex;
+                    align-items    : center;
+                    justify-content: flex-end;
+
+                    .text {
+                        font-size   : 18px;
+                        margin-right: 20px;
+                    }
+
+                    .total {
+                        width: 50px;
+                    }
+                }
+
+                .new-order::-webkit-scrollbar {
+                    display: none;
+                    /* for Chrome, Safari and Opera */
+                }
+
+                .shipping::-webkit-scrollbar {
+                    display: none;
+                    /* for Chrome, Safari and Opera */
+                }
+            }
+
+            .message {}
+
+        }
+    }
+
+    &.sticky-header {
+        position : sticky;
+        top      : 0;
+        animation: stickyHeader 0.3s ease forwards;
+    }
+
+    @keyframes stickyHeader {
+        0% {
+            transform: translateY(-80px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+}
+
+.single-chat-container {
+    position: fixed;
+    bottom  : 0;
+}

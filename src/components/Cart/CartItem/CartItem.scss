@@ -1,0 +1,92 @@
+@import"../../../css-config/mixins.scss";
+
+.cart-products {
+    height    : calc(100vh - 250px);
+    overflow-x: auto;
+
+    .cart-product {
+        padding : 20px 15px;
+        display : flex;
+        gap     : 10px;
+        position: relative;
+
+
+        .img-container {
+            background-color: rgba($color: #000000, $alpha: 0.105);
+            width           : 80px;
+            height          : 80px;
+
+            img {
+                width : 100%;
+                height: 100%;
+            }
+        }
+
+        .product-detail {
+            overflow   : hidden;
+            flex-shrink: 11;
+
+            .name {
+                text-overflow: ellipsis;
+                white-space  : nowrap;
+                overflow     : hidden;
+                font-size    : 16px;
+                line-height  : 1;
+                margin-bottom: 10px;
+                font-weight  : 600;
+                padding-right: 25px;
+                display      : block;
+            }
+
+            .text {
+                display    : flex;
+                align-items: center;
+                gap        : 5px;
+                font-size  : 12px;
+                font-weight: 600;
+
+                .highlight {
+                    color: #8e2de8;
+                }
+            }
+
+            svg {
+                position: absolute;
+                top     : 10px;
+                right   : 10px;
+                cursor  : pointer;
+            }
+
+            .quantity-btns {
+                width       : fit-content;
+                display     : flex;
+                border      : 2px solid rgba($color: #000000, $alpha: 0.2);
+                margin-right: 10px;
+                height      : 40px;
+
+                span {
+                    font-size      : 14px;
+                    width          : 30px;
+                    display        : flex;
+                    align-items    : center;
+                    justify-content: center;
+                    color          : #6b6b6b;
+                    cursor         : pointer;
+
+                    &:nth-child(1) {
+                        border-right: 2px solid rgba($color: #000000, $alpha: 0.2);
+                    }
+
+                    &:nth-child(2) {
+                        border-right: 2px solid rgba($color: #000000, $alpha: 0.2);
+                        width       : 60px;
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.05);
+        }
+    }
+}
