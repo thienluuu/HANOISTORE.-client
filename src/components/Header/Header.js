@@ -27,6 +27,7 @@ import {
   confirmShippedOrderService,
   deleteNewOrderService,
   getUserDataService,
+  getChatsByUserIdService,
 } from "../../services/userService";
 import {
   getNewOrderByUserSuccess,
@@ -53,6 +54,7 @@ const Header = () => {
   const [messages, setMessages] = useState([]);
   const [latestMessage, setLatestMessage] = useState("");
   const [fetchAgain, setFetchAgain] = useState(false);
+  const [chats, setChats] = useState([]);
 
   let userData = exportFromLocalStorage("userData");
   let cartData = exportFromLocalStorage("cartData");
@@ -92,6 +94,22 @@ const Header = () => {
       setQuantity("");
     }
   }, [cartData.length]);
+  useEffect(() => {
+    const getChats = async () => {
+      try {
+        const res = await getChatsByUserIdService(userData.token);
+        if (res && res.data.errCode === 0) {
+          toast.success(res.data.message);
+          setChats(res.data.data);
+        } else {
+          toast.error(res.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getChats();
+  }, [userData.token]);
   //Handle
   const handleScroll = () => {
     const scroll = window.scrollY;
@@ -285,6 +303,7 @@ const Header = () => {
                       setShowSingleChat={setShowSingleChat}
                       setLatestMessage={setLatestMessage}
                       setFetchAgain={setFetchAgain}
+                      chats={chats}
                     />
                   ) : (
                     <div>User isn't login</div>

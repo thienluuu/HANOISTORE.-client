@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
 
 import "./Search.scss";
 import { MdClose } from "react-icons/md";
@@ -68,10 +69,14 @@ const Search = ({ setShowSearch }) => {
                   <div className="img-container">
                     <img src={item.image} alt="" />
                   </div>
-                  <div className="product-detail">
+                  <Link
+                    className="product-detail"
+                    to={`/product/${item.id}`}
+                    onClick={() => setShowSearch(false)}
+                  >
                     <span className="name">{item.productName}</span>
                     <span className="desc">{item.description}</span>
-                  </div>
+                  </Link>
                 </div>
               );
             })}

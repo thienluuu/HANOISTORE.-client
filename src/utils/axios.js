@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-  baseURL: "http://localhost:3030",
+  baseURL: "https://server-hanoistore.onrender.com",
 });
 
 // request.interceptors.response.use((response) => {

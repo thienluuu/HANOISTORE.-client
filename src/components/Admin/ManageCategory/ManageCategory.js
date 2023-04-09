@@ -105,6 +105,7 @@ const ManageCategory = () => {
         toast.success(res.data.message);
         dispatch(createNewCategorySuccess(category));
         setCategory(initialState);
+        setPreviewImageUrl("");
       } else {
         toast.error(res.data.message);
       }

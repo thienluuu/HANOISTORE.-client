@@ -66,7 +66,7 @@ const SingleProduct = () => {
         console.log(error);
       }
     };
-  }, []);
+  }, [id]);
   //handle
   const handleQuantity = (id) => {
     if (id === "down") {

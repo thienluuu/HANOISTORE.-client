@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./Chat.scss";
 import { toast } from "react-toastify";
-import {
-  getChatsByUserIdService,
-  createChatService,
-} from "../../../services/userService";
+import { createChatService } from "../../../services/userService";
 
 const Chat = ({
   usersData,
@@ -14,24 +11,10 @@ const Chat = ({
   userData,
   latestMessage,
   setFetchAgain,
+  chats,
 }) => {
-  const [chats, setChats] = useState([]);
   const [newUsers, setNewUsers] = useState([]);
 
-  const getChats = async () => {
-    try {
-      const res = await getChatsByUserIdService(userData.token);
-      if (res && res.data.errCode === 0) {
-        toast.success(res.data.message);
-        setChats(res.data.data);
-      } else {
-        toast.error(res.data.message);
-        setChats([]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const createChat = async (data) => {
     try {
       const res = await createChatService(data);
@@ -45,9 +28,7 @@ const Chat = ({
       console.log(error);
     }
   };
-  useEffect(() => {
-    getChats();
-  }, []);
+
   useEffect(() => {
     let newUsers = usersData.map((user) => {
       let token = user.token;
@@ -58,12 +39,9 @@ const Chat = ({
       return user;
     });
     newUsers = newUsers.filter((newUsers) => newUsers.chat);
-    console.log(newUsers);
-    if (chats.length > 0) {
-      setNewUsers(newUsers);
-    }
-  }, [chats]);
 
+    setNewUsers(newUsers);
+  }, [chats && chats.length > 0]);
   const handleCreateChat = (userChatId) => {
     let data = {
       members: [userChatId, userData.token],

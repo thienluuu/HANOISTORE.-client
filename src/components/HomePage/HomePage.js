@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import "./HomePage.scss";
 import Banner from "./Banner/Banner";
 import Category from "./Category/Category";

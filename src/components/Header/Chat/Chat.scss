@@ -6,6 +6,8 @@
 
 
     .admin-section {
+        min-height: 100px;
+
         .admin-item {
             display        : flex;
             justify-content: space-between;

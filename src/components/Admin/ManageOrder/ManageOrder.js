@@ -24,6 +24,7 @@ const ManageOrder = () => {
       if (res && res.data.errCode === 0) {
         toast.success(res.data.message);
         dispatch(getNewOrderSuccess(res.data.data));
+        console.log(res.data.data);
       } else {
         toast.error(res.data.message);
       }

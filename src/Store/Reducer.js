@@ -181,7 +181,8 @@ const reducer = (state, action) => {
       };
 
     //order
-    case actionTypes.GET_NEW_ORDER_BY_USER_SUCCESS:
+    case actionTypes.GET_NEW_ORDER_SUCCESS:
+      console.log(action.data);
       return {
         ...state,
         newOrders: [...action.data],
