@@ -1,7 +1,8 @@
 import axios from "axios";
+require("dotenv").config();
 
 const request = axios.create({
-  baseURL: "https://server-hanoistore.onrender.com",
+  baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
 // request.interceptors.response.use((response) => {
