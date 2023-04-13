@@ -72,7 +72,7 @@ const SingleChat = ({
   };
   useEffect(() => {
     getAllMessagesByChatId();
-    socket = io("http://localhost:3030");
+    socket = io(process.env.REACT_APP_BACKEND_URL);
     socket.emit("setup", userData);
   }, []);
   useEffect(() => {
