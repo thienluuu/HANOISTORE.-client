@@ -49,26 +49,28 @@ const Cart = ({ setShowCart }) => {
         quantity: item.quantity,
         statusId: "S1",
         userId: userData.id,
+        image: item.product.image,
       };
       return newItem;
     });
-    try {
-      const res = await createNewOrderService(order);
-      if (res && res.data.errCode === 0) {
-        toast.success(res.data.message);
-        setCartItem([]);
-        dispatch(clearCartItem());
-        window.location.reload();
-      } else {
-        toast.error(res.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(order);
+    // try {
+    //   const res = await createNewOrderService(order);
+    //   if (res && res.data.errCode === 0) {
+    //     toast.success(res.data.message);
+    //     setCartItem([]);
+    //     dispatch(clearCartItem());
+    //     window.location.reload();
+    //   } else {
+    //     toast.error(res.data.message);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   return (
     <div className="cart-panel">
-      <div className="opacity-layer"></div>
+      <div className="opacity-layer" onClick={() => setShowCart(false)}></div>
       <div className="cart-content">
         <div className="cart-header">
           <span className="heading">Shopping Cart</span>

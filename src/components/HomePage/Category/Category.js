@@ -4,9 +4,24 @@ import { Link } from "react-router-dom";
 import "./Category.scss";
 
 const Category = ({ data }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setIsLoading(false);
+    }
+  }, [data]);
   return (
-    <div className="shop-by-category" >
+    <div className="shop-by-category">
       <div className="categories">
+        {isLoading && (
+          <>
+            <div className="skeleton"></div>
+            <div className="skeleton"></div>
+            <div className="skeleton"></div>
+            <div className="skeleton"></div>
+          </>
+        )}
         {data &&
           data.length > 0 &&
           data.map((item, index) => {

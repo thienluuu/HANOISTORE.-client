@@ -34,6 +34,8 @@ import {
   getShippingOrderByUserSuccess,
   deleteNewOrderByUserSuccess,
   confirmShippingOrderByUserSuccess,
+  getChatsSuccess,
+  getDataUserByIdSuccess,
 } from "../../Store";
 import { toast } from "react-toastify";
 
@@ -72,7 +74,7 @@ const Header = () => {
       try {
         const res = await getUserDataService(data);
         if (res && res.data.errCode === 0) {
-          setUsers(res.data.data);
+          dispatch(getDataUserByIdSuccess(res.data.data));
           toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
@@ -95,12 +97,13 @@ const Header = () => {
     }
   }, [cartData.length]);
   useEffect(() => {
-    const getChats = async () => {
+    const getChats = async (id) => {
       try {
-        const res = await getChatsByUserIdService(userData.token);
+        const res = await getChatsByUserIdService(id);
         if (res && res.data.errCode === 0) {
           toast.success(res.data.message);
           setChats(res.data.data);
+          dispatch(getChatsSuccess(res.data.data));
         } else {
           toast.error(res.data.message);
         }
@@ -108,7 +111,9 @@ const Header = () => {
         console.log(error);
       }
     };
-    getChats();
+    if (userData.token) {
+      getChats(userData.token);
+    }
   }, [userData.token]);
   //Handle
   const handleScroll = () => {
@@ -225,7 +230,7 @@ const Header = () => {
                         newOrders.map((item, index) => {
                           return (
                             <div className="item" key={index}>
-                              <img sr={item.img} alt="product" />
+                              <img sr={item.image} alt="product" />
                               <div className="product-detail">
                                 <div className="name">{item.productName}</div>
                                 <div className="price">
@@ -297,13 +302,11 @@ const Header = () => {
                   isLoggedIn ? (
                     <Chat
                       isLoggedIn={isLoggedIn}
-                      usersData={users}
                       userData={userData}
                       setUserChat={setUserChat}
                       setShowSingleChat={setShowSingleChat}
                       setLatestMessage={setLatestMessage}
                       setFetchAgain={setFetchAgain}
-                      chats={chats}
                     />
                   ) : (
                     <div>User isn't login</div>

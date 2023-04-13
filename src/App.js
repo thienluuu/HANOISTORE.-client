@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "./components/RequireAuth";
 
 const App = () => {
+ 
   return (
     <BrowserRouter>
       <AppContext>

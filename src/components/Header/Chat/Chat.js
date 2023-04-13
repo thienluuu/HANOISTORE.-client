@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useStore } from "../../../hooks/useStore";
 
 import "./Chat.scss";
 import { toast } from "react-toastify";
 import { createChatService } from "../../../services/userService";
 
 const Chat = ({
-  usersData,
   setShowSingleChat,
   setUserChat,
   userData,
   latestMessage,
   setFetchAgain,
-  chats,
 }) => {
   const [newUsers, setNewUsers] = useState([]);
-
+  const [state, dispatch] = useStore();
+  const { chats, userDataById } = state;
   const createChat = async (data) => {
     try {
       const res = await createChatService(data);
@@ -30,18 +30,19 @@ const Chat = ({
   };
 
   useEffect(() => {
-    let newUsers = usersData.map((user) => {
-      let token = user.token;
-      let data = chats.filter((chat) => chat.members.includes(token));
-      if (data && data.length > 0) {
-        user.chat = data[0];
-      }
-      return user;
-    });
-    newUsers = newUsers.filter((newUsers) => newUsers.chat);
-
-    setNewUsers(newUsers);
-  }, [chats && chats.length > 0]);
+    if (chats.length > 0 && userDataById.length > 0) {
+      let newUsers = userDataById.map((user) => {
+        let token = user.token;
+        let data = chats.filter((chat) => chat.members.includes(token));
+        if (data && data.length > 0) {
+          user.chat = data[0];
+        }
+        return user;
+      });
+      newUsers = newUsers.filter((newUser) => newUser.chat);
+      setNewUsers(newUsers);
+    }
+  }, [chats && userDataById]);
   const handleCreateChat = (userChatId) => {
     let data = {
       members: [userChatId, userData.token],
@@ -54,9 +55,9 @@ const Chat = ({
         <div className="admin-section">
           <div className="title">List Admin</div>
           <div className="list-admin">
-            {usersData &&
-              usersData.length > 0 &&
-              usersData.map((user, index) => {
+            {userDataById &&
+              userDataById.length > 0 &&
+              userDataById.map((user, index) => {
                 return (
                   <div
                     className="admin-item"

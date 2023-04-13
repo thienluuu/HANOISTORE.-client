@@ -15,6 +15,9 @@ const initialState = {
 
   newOrders: [],
   shippingOrders: [],
+
+  chats: [],
+  userDataById: [],
 };
 
 const reducer = (state, action) => {
@@ -182,7 +185,6 @@ const reducer = (state, action) => {
 
     //order
     case actionTypes.GET_NEW_ORDER_SUCCESS:
-      console.log(action.data);
       return {
         ...state,
         newOrders: [...action.data],
@@ -191,6 +193,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         shippingOrders: [...action.data],
+      };
+    case actionTypes.GET_NEW_ORDER_BY_USER_SUCCESS:
+      return {
+        ...state,
+        newOrders: [...action.data],
       };
     case actionTypes.DELETE_SHIPPING_ORDER_BY_USER_SUCCESS:
       let newOrders1 = [...state.newOrders];
@@ -206,6 +213,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         shippingOrders: shippingOrders1,
+      };
+
+    //Chat
+    case actionTypes.GET_CHATS_SUCCESS:
+      return {
+        ...state,
+        chats: [...action.data],
+      };
+    case actionTypes.GET_USER_DATA_BY_ID_SUCCESS:
+      return {
+        ...state,
+        userDataById: [...action.data],
       };
     default:
       return state;

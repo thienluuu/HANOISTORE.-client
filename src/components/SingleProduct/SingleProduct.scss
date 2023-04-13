@@ -37,6 +37,26 @@
                     width  : 100%;
                     display: block;
                 }
+
+                &.skeleton {
+                    height          : 355px;
+                    background-color: #e2e5e7;
+                    background-image:
+                        linear-gradient(90deg,
+                            rgba(#fff, 0),
+                            rgba(#fff, 0.5),
+                            rgba(#fff, 0));
+                    background-size    : 40px 100%;
+                    background-repeat  : no-repeat;
+                    background-position: left -40px top 0;
+                    animation          : skeleton-loading 1s ease infinite;
+
+                    @include md {
+                        width : 600px;
+                        height: 600px;
+                    }
+
+                }
             }
 
             .right {
@@ -45,8 +65,10 @@
                 padding-top   : 20px;
                 flex-shrink   : 6;
 
+
                 @include md {
                     padding: 0 35px;
+                    width  : 50%;
                 }
 
                 .name {
@@ -58,6 +80,22 @@
                         font-size  : 24px;
                         line-height: 32px;
                     }
+
+                    &.skeleton {
+                        height          : 28px;
+                        background-color: #e2e5e7;
+                        background-image:
+                            linear-gradient(90deg,
+                                rgba(#fff, 0),
+                                rgba(#fff, 0.5),
+                                rgba(#fff, 0));
+                        background-size    : 40px 100%;
+                        background-repeat  : no-repeat;
+                        background-position: left -40px top 0;
+                        animation          : skeleton-loading 1s ease infinite;
+
+
+                    }
                 }
 
                 .price {
@@ -65,6 +103,22 @@
                     line-height  : 32px;
                     margin-bottom: 20px;
                     color        : #8e2de2;
+
+                    &.skeleton {
+                        height          : 28px;
+                        background-color: #e2e5e7;
+                        background-image:
+                            linear-gradient(90deg,
+                                rgba(#fff, 0),
+                                rgba(#fff, 0.5),
+                                rgba(#fff, 0));
+                        background-size    : 40px 100%;
+                        background-repeat  : no-repeat;
+                        background-position: left -40px top 0;
+                        animation          : skeleton-loading 1s ease infinite;
+
+
+                    }
                 }
 
                 .desc {
@@ -72,10 +126,28 @@
                     line-height  : 20px;
                     margin-bottom: 20px;
                     color        : #6b6b6b;
+                    height       : 300px;
+                    overflow-y   : scroll;
 
                     @include md {
                         font-size  : 16px;
                         line-height: 24px;
+                    }
+
+                    &.skeleton {
+                        height          : 300px;
+                        background-color: #e2e5e7;
+                        background-image:
+                            linear-gradient(90deg,
+                                rgba(#fff, 0),
+                                rgba(#fff, 0.5),
+                                rgba(#fff, 0));
+                        background-size    : 40px 100%;
+                        background-repeat  : no-repeat;
+                        background-position: left -40px top 0;
+                        animation          : skeleton-loading 1s ease infinite;
+
+
                     }
                 }
 
@@ -149,13 +221,30 @@
                         font-weight: 500;
                         display    : block;
 
-                        span {
+                        .category {
                             font-size  : 14px;
                             font-weight: 400;
                             cursor     : pointer;
                             color      : #6b6b6b;
                             margin-left: 5px;
+                            width      : 100%;
+
+                            &.skeleton {
+                                height          : 14px;
+                                background-color: #e2e5e7;
+                                background-image:
+                                    linear-gradient(90deg,
+                                        rgba(#fff, 0),
+                                        rgba(#fff, 0.5),
+                                        rgba(#fff, 0));
+                                background-size    : 40px 100%;
+                                background-repeat  : no-repeat;
+                                background-position: left -40px top 0;
+                                animation          : skeleton-loading 1s ease infinite;
+                            }
                         }
+
+
 
                         svg {
                             margin: 0 5px;
@@ -217,5 +306,11 @@
 
             }
         }
+    }
+}
+
+@keyframes skeleton-loading {
+    to {
+        background-position: right -40px top 0;
     }
 }

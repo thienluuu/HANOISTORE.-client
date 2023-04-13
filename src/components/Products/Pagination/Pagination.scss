@@ -1,0 +1,40 @@
+@import"../../../css-config/mixins.scss";
+
+.pagination {
+    display        : flex;
+    flex-direction : row;
+    gap            : 10px;
+    justify-content: center;
+
+    a {
+        min-width       : 30px;
+        height          : 40px;
+        outline         : none;
+        border          : none;
+        font-size       : 16px;
+        padding         : 10px;
+        background-color: #8e2de8;
+        color           : white;
+        text-decoration : none;
+        border-radius   : 3px;
+        display         : inline-block;
+        text-align      : center;
+
+        &.active {
+            background-color: rgb(202, 162, 109);
+            color           : #8e2de8;
+        }
+
+        &:hover {
+            opacity: 0.7;
+        }
+
+
+    }
+
+    .disabled {
+        display: none;
+    }
+
+
+}

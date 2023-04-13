@@ -2,6 +2,7 @@ import React from "react";
 
 import "./Banner.scss";
 import BannerImg from "../../../assets/banner-img.png";
+import SliderShow from "./Slider/SliderShow";
 const Banner = () => {
   return (
     <div className="hero-banner">
@@ -14,7 +15,9 @@ const Banner = () => {
             <div className="banner-btn v2">Shop Now</div>
           </div>
         </div>
-        <img className="banner-img" src={BannerImg} alt="" />
+        <div className="banner-slider">
+          <SliderShow />
+        </div>
       </div>
     </div>
   );

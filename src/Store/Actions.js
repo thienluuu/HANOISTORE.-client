@@ -185,3 +185,17 @@ export const confirmOrder = (index) => {
     index: index,
   };
 };
+
+//chat
+export const getChatsSuccess = (data) => {
+  return {
+    type: actionTypes.GET_CHATS_SUCCESS,
+    data: data,
+  };
+};
+export const getDataUserByIdSuccess = (data) => {
+  return {
+    type: actionTypes.GET_USER_DATA_BY_ID_SUCCESS,
+    data: data,
+  };
+};

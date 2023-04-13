@@ -11,7 +11,6 @@
     }
 
     .content {
-
         position       : relative;
         display        : flex;
         height         : 100%;
@@ -20,38 +19,32 @@
         flex-direction : column-reverse;
         margin         : 0 auto;
 
+
         @include lg {
             flex-direction: row;
             max-width     : 1200px;
         }
 
-        .banner-img {
-            z-index      : 9;
-            width        : 200px;
-            margin-bottom: 20px;
-            margin-left  : 10px;
+        .banner-slider {
+            animation: rightToLeft ease 0.7s;
 
+            .slider {
+                width: 300px;
 
-            @include md {
-                width        : 350px;
-                margin-right : 50px;
-                margin-top   : 50px;
-                margin-bottom: 0;
-            }
+                @include md {
+                    width: 350px;
+                }
 
-            @include lg {
-                width        : 500px;
-                margin-right : 60px;
-                margin-top   : 50px;
-                margin-bottom: 0;
-            }
+                @include lg {
+                    width: 500px;
+                }
 
-            @include xxl {
-                width       : 600px;
-                margin-right: 0;
-                margin-top  : 0;
+                @include xxl {
+                    width: 600px;
+                }
             }
         }
+
 
         .text-content {
             text-align    : center;
@@ -60,23 +53,19 @@
             flex-direction: column;
             align-items   : center;
             margin-bottom : 20px;
+            margin-top    : 20px;
+            animation     : leftToRight ease 0.7s;
 
             @include md {
-                position : absolute;
-                left     : 120px;
-                top      : 80%;
-                transform: translateY(-50%);
+                position: absolute;
+                left    : 150px;
+                top     : 50%;
             }
 
-            @include lg {
-                position : absolute;
-                left     : 50px;
-                top      : 50%;
-                transform: translateY(-50%);
-            }
-
-            @include xxl {
-                left: 0;
+            @include xl {
+                position: absolute;
+                left    : 0;
+                top     : 30%;
             }
 
             h1 {
@@ -136,4 +125,24 @@
 
     }
 
+}
+
+@keyframes leftToRight {
+    0% {
+        transform: translateX(-400px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes rightToLeft {
+    0% {
+        transform: translateX(400px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }

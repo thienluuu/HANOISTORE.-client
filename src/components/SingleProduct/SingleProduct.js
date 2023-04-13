@@ -25,6 +25,7 @@ const SingleProduct = () => {
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [state, dispatch] = useStore();
+  const [isLoading, setIsLoading] = useState(true);
 
   const params = useParams();
   const { id } = params;
@@ -57,6 +58,7 @@ const SingleProduct = () => {
         };
         const res = await getRelatedProductService(data);
         if (res && res.data.errCode === 0) {
+          setIsLoading(false);
           toast.success(res.data.message);
           setRelatedProduct(res.data.data);
         } else {
@@ -92,13 +94,19 @@ const SingleProduct = () => {
     <div className="single-product-main-container">
       <div className="layout">
         <div className="single-product-page">
-          <div className="left">
-            <img src={product.image} alt="" />
+          <div className={isLoading ? "left skeleton" : "left"}>
+            {!isLoading && <img src={product.image} alt="" />}
           </div>
           <div className="right">
-            <span className="name">{product.productName}</span>
-            <span className="price">Price: {product.price}&#36;</span>
-            <span className="desc">{product.description}</span>
+            <span className={isLoading ? "name skeleton" : "name"}>
+              {!isLoading ? product.productName : ""}
+            </span>
+            <span className={isLoading ? "price skeleton" : "price"}>
+              {!isLoading ? `Price: ${product.price}$ ` : ""}
+            </span>
+            <span className={isLoading ? "desc skeleton" : "desc"}>
+              {!isLoading ? product.description : ""}
+            </span>
 
             <div className="cart-btns">
               <div className="quantity-btns">
@@ -119,10 +127,16 @@ const SingleProduct = () => {
             <div className="info-item">
               <span className="text-bold">
                 Category:
-                <span>
-                  {product.categoryData && product.categoryData.name
-                    ? product.categoryData.name
-                    : ""}
+                <span className={isLoading ? "category skeleton" : "category"}>
+                  {!isLoading ? (
+                    <>
+                      {product.categoryData && product.categoryData.name
+                        ? product.categoryData.name
+                        : ""}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </span>
               </span>
               <span className="text-bold">
@@ -142,6 +156,18 @@ const SingleProduct = () => {
           <div className="products-container">
             <div className="sec-heading">Related Products</div>
             <div className="products">
+              {isLoading && (
+                <>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                  <div className="skeleton"></div>
+                </>
+              )}
               {relatedProduct &&
                 relatedProduct.length > 0 &&
                 relatedProduct.map((item, index) => {

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./SingleChat.scss";
 import InputEmoji from "react-input-emoji";
+import TimeAgo from "javascript-time-ago";
 
 import { MdClose, MdOutlineSend } from "react-icons/md";
-import { io } from "socket.io-client";
 import {
   getAllMessagesByChatIdService,
   postMessagesByChatIdService,
 } from "../../../services/userService";
 import { toast } from "react-toastify";
+import { io } from "socket.io-client";
 import moment from "moment";
 
 var socket;
@@ -23,11 +24,13 @@ const SingleChat = ({
 }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const getAllMessagesByChatId = async () => {
     try {
       const res = await getAllMessagesByChatIdService(userChat.chat.chatId);
       if (res && res.data.errCode === 0) {
+        setIsLoading(false);
         setMessages(res.data.data);
       } else if (res && res.data.errCode === 2) {
         let data;
@@ -69,14 +72,13 @@ const SingleChat = ({
   };
   useEffect(() => {
     getAllMessagesByChatId();
-    socket = io("http://localhost:8080");
+    socket = io("http://localhost:3030");
     socket.emit("setup", userData);
   }, []);
   useEffect(() => {
     if (fetchAgain === true) {
       getAllMessagesByChatId();
       setFetchAgain(false);
-      console.log(fetchAgain);
     }
   }, [fetchAgain]);
 
@@ -114,6 +116,15 @@ const SingleChat = ({
       setNewMessage("");
     }
   };
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div className="single-chat-container">
@@ -124,7 +135,7 @@ const SingleChat = ({
         </span>
       </div>
       <div className="body">
-        <div className="content">
+        <div className={isLoading ? "content skeleton" : "content"}>
           {messages &&
             messages.length > 0 &&
             messages.map((message, index) => {
@@ -146,6 +157,7 @@ const SingleChat = ({
                 </div>
               );
             })}
+          <div ref={messagesEndRef} />
         </div>
       </div>
       <div className="footer">
