@@ -94,6 +94,9 @@ const SingleChat = ({
   });
 
   const submitMessage = (message, senderId) => {
+    if (!message) {
+      return;
+    }
     let data = {
       senderId: senderId,
       content: message,
