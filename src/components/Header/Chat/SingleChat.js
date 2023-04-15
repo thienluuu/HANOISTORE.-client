@@ -53,6 +53,7 @@ const SingleChat = ({
           ];
         }
         setMessages(data);
+        setIsLoading(false);
       } else toast.error(res.data.message);
     } catch (error) {
       console.log(error);

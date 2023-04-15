@@ -53,20 +53,19 @@ const Cart = ({ setShowCart }) => {
       };
       return newItem;
     });
-    console.log(order);
-    // try {
-    //   const res = await createNewOrderService(order);
-    //   if (res && res.data.errCode === 0) {
-    //     toast.success(res.data.message);
-    //     setCartItem([]);
-    //     dispatch(clearCartItem());
-    //     window.location.reload();
-    //   } else {
-    //     toast.error(res.data.message);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const res = await createNewOrderService(order);
+      if (res && res.data.errCode === 0) {
+        toast.success(res.data.message);
+        setCartItem([]);
+        dispatch(clearCartItem());
+        window.location.reload();
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="cart-panel">

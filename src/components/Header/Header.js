@@ -6,10 +6,11 @@ import Search from "./Search/Search";
 import Cart from "../Cart/Cart";
 import Chat from "./Chat/Chat";
 import SingleChat from "./Chat/SingleChat";
+import Menu from "./Menu/Menu";
 
-import { TbSearch, TbBrandMessenger } from "react-icons/tb";
+import { TbSearch, TbBrandMessenger, TbMenu2 } from "react-icons/tb";
 import { CgShoppingCart } from "react-icons/cg";
-import { AiOutlineShopping } from "react-icons/ai";
+import { AiOutlineShopping, AiOutlineMenu } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 
 import {
@@ -51,6 +52,7 @@ const Header = () => {
   const [users, setUsers] = useState([]);
   const [userChat, setUserChat] = useState(null);
   const [showSingleChat, setShowSingleChat] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const { newOrders, shippingOrders } = state;
 
   const [messages, setMessages] = useState([]);
@@ -218,110 +220,127 @@ const Header = () => {
             HANOISTORE.
           </Link>
           <div className="right">
-            <div className="order">
-              <Tippy
-                interactive
-                placement="bottom"
-                content={
-                  <>
-                    <div className="new-order">
-                      <span className="title">New Order</span>
-                      {newOrders && newOrders.length > 0 ? (
-                        newOrders.map((item, index) => {
-                          return (
-                            <div className="item" key={index}>
-                              <img sr={item.image} alt="product" />
-                              <div className="product-detail">
-                                <div className="name">{item.productName}</div>
-                                <div className="price">
-                                  {item.price}x{item.quantity}
+            {isLoggedIn ? (
+              <div className="order">
+                <Tippy
+                  interactive
+                  placement="bottom"
+                  content={
+                    <>
+                      <div className="new-order">
+                        <span className="title">New Order</span>
+                        {newOrders && newOrders.length > 0 ? (
+                          newOrders.map((item, index) => {
+                            return (
+                              <div className="item" key={index}>
+                                <img sr={item.image} alt="product" />
+                                <div className="product-detail">
+                                  <div className="name">{item.productName}</div>
+                                  <div className="price">
+                                    {item.price}x{item.quantity}
+                                  </div>
                                 </div>
+                                <button
+                                  onClick={() =>
+                                    handleCancelOrder(item.id, index)
+                                  }
+                                >
+                                  Cancel
+                                </button>
                               </div>
-                              <button
-                                onClick={() =>
-                                  handleCancelOrder(item.id, index)
-                                }
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          );
-                        })
-                      ) : (
-                        <div>Your order is empty</div>
-                      )}
-                    </div>
-                    <div className="shipping">
-                      <span className="title">Shipping</span>
-                      {shippingOrders && shippingOrders.length > 0 ? (
-                        shippingOrders.map((item, index) => {
-                          return (
-                            <div className="item" key={index}>
-                              <img sr={item.img} alt="product" />
-                              <div className="product-detail">
-                                <span className="name">{item.productName}</span>
-                                <span className="price">
-                                  {" "}
-                                  {item.price}x{item.quantity}
-                                </span>
+                            );
+                          })
+                        ) : (
+                          <div>Your order is empty</div>
+                        )}
+                      </div>
+                      <div className="shipping">
+                        <span className="title">Shipping</span>
+                        {shippingOrders && shippingOrders.length > 0 ? (
+                          shippingOrders.map((item, index) => {
+                            return (
+                              <div className="item" key={index}>
+                                <img sr={item.img} alt="product" />
+                                <div className="product-detail">
+                                  <span className="name">
+                                    {item.productName}
+                                  </span>
+                                  <span className="price">
+                                    {" "}
+                                    {item.price}x{item.quantity}
+                                  </span>
+                                </div>
+                                <button
+                                  onClick={() =>
+                                    handleConfirmShippedOrder(item.id)
+                                  }
+                                >
+                                  Received
+                                </button>
                               </div>
-                              <button
-                                onClick={() =>
-                                  handleConfirmShippedOrder(item.id)
-                                }
-                              >
-                                Received
-                              </button>
-                            </div>
-                          );
-                        })
-                      ) : (
-                        <div>Your order hasn't confirm by Admin</div>
-                      )}
-                    </div>
-                    <div className="order-footer">
-                      <div className="text">Total Price:</div>
-                      <div className="total">{toTal ? toTal : 0}&#36;</div>
-                    </div>
-                  </>
-                }
-              >
-                <div>
-                  <AiOutlineShopping />
-                </div>
-              </Tippy>
-            </div>
+                            );
+                          })
+                        ) : (
+                          <div>Your order hasn't confirm by Admin</div>
+                        )}
+                      </div>
+                      <div className="order-footer">
+                        <div className="text">Total Price:</div>
+                        <div className="total">{toTal ? toTal : 0}&#36;</div>
+                      </div>
+                    </>
+                  }
+                >
+                  <div>
+                    <AiOutlineShopping />
+                  </div>
+                </Tippy>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="search">
               <TbSearch onClick={() => setShowSearch(true)} />
             </div>
-            <div className="message">
-              <Tippy
-                interactive
-                placement="bottom"
-                content={
-                  isLoggedIn ? (
-                    <Chat
-                      isLoggedIn={isLoggedIn}
-                      userData={userData}
-                      setUserChat={setUserChat}
-                      setShowSingleChat={setShowSingleChat}
-                      setLatestMessage={setLatestMessage}
-                      setFetchAgain={setFetchAgain}
-                    />
-                  ) : (
-                    <div>User isn't login</div>
-                  )
-                }
-              >
-                <span>
-                  <TbBrandMessenger />
-                </span>
-              </Tippy>
+            {isLoggedIn ? (
+              <div className="message">
+                <Tippy
+                  interactive
+                  placement="bottom"
+                  content={
+                    isLoggedIn ? (
+                      <Chat
+                        isLoggedIn={isLoggedIn}
+                        userData={userData}
+                        setUserChat={setUserChat}
+                        setShowSingleChat={setShowSingleChat}
+                        setLatestMessage={setLatestMessage}
+                        setFetchAgain={setFetchAgain}
+                      />
+                    ) : (
+                      <div>User isn't login</div>
+                    )
+                  }
+                >
+                  <span>
+                    <TbBrandMessenger />
+                  </span>
+                </Tippy>
+              </div>
+            ) : (
+              <></>
+            )}
+            {isLoggedIn ? (
+              <span className="cart-icon" onClick={() => setShowCart(true)}>
+                <CgShoppingCart />
+                {quantity && <span>{quantity}</span>}
+              </span>
+            ) : (
+              <></>
+            )}
+            <div className="menu-icon" onClick={() => setShowMenu(true)}>
+              <TbMenu2 />
             </div>
-            <span className="cart-icon" onClick={() => setShowCart(true)}>
-              <CgShoppingCart />
-              {quantity && <span>{quantity}</span>}
-            </span>
             {!isLoggedIn ? (
               <Link className="login-btn" to="/login">
                 Login
@@ -336,6 +355,13 @@ const Header = () => {
       </div>
       {showCart && <Cart setShowCart={setShowCart} />}
       {showSearch && <Search setShowSearch={setShowSearch} />}
+      {showMenu && (
+        <Menu
+          setShowMenu={setShowMenu}
+          setShowCart={setShowCart}
+          setShowSearch={setShowSearch}
+        />
+      )}
       {showSingleChat && (
         <SingleChat
           userChat={userChat}

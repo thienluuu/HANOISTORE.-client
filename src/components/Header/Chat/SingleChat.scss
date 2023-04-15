@@ -14,6 +14,12 @@
     @include md {
         width : 350px;
         right : 50px;
+        height: 36vh;
+    }
+
+    @include lg {
+        width : 350px;
+        right : 50px;
         height: 44vh;
     }
 

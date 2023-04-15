@@ -1,0 +1,51 @@
+@import"../../../css-config/mixins.scss";
+
+.menu {
+    position        : fixed;
+    top             : 0;
+    right           : 0;
+    height          : 100vh;
+    width           : 100vw;
+    background-color: white;
+    transform       : translateX(100%);
+    animation       : slideMenuWindow 0.3s ease forwards;
+    z-index         : 100;
+    padding         : 20px;
+
+
+    .menu-header {
+        display        : flex;
+        justify-content: space-between;
+        font-size      : 30px;
+        margin-bottom  : 10px;
+        border-bottom  : 2px solid #333;
+
+    }
+
+    .list-item {
+        text-decoration: none;
+        list-style     : none;
+        padding-left   : 0;
+
+        .menu-item {
+            font-size      : 20px;
+            display        : flex;
+            justify-content: space-between;
+            padding-bottom : 10px;
+        }
+
+    }
+
+}
+
+
+
+@keyframes slideMenuWindow {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
