@@ -52,7 +52,7 @@ const Header = () => {
   const [users, setUsers] = useState([]);
   const [userChat, setUserChat] = useState(null);
   const [showSingleChat, setShowSingleChat] = useState(false);
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const { newOrders, shippingOrders } = state;
 
   const [messages, setMessages] = useState([]);
