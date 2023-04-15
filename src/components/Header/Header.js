@@ -354,7 +354,9 @@ const Header = () => {
         </div>
       </div>
       {showCart && <Cart setShowCart={setShowCart} />}
-      {showSearch && <Search setShowSearch={setShowSearch} />}
+      {showSearch && (
+        <Search setShowSearch={setShowSearch} setShowMenu={setShowMenu} />
+      )}
       {showMenu && (
         <Menu
           setShowMenu={setShowMenu}

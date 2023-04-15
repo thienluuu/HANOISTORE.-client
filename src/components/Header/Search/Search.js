@@ -8,7 +8,7 @@ import { searchProductService } from "../../../services/userService";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { toast } from "react-toastify";
 
-const Search = ({ setShowSearch }) => {
+const Search = ({ setShowSearch, setShowMenu }) => {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +72,10 @@ const Search = ({ setShowSearch }) => {
                   <Link
                     className="product-detail"
                     to={`/product/${item.id}`}
-                    onClick={() => setShowSearch(false)}
+                    onClick={() => {
+                      setShowSearch(false);
+                      setShowMenu(false);
+                    }}
                   >
                     <span className="name">{item.productName}</span>
                     <span className="desc">{item.description}</span>
